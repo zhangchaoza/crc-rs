@@ -2,8 +2,8 @@ use crate::crc16::{finalize, init, update_bytewise};
 use crate::table::crc16_table;
 use crate::*;
 
-impl Crc<u16, Table<1>> {
-    pub const fn new(algorithm: &'static Algorithm<u16>) -> Self {
+impl <'a> Crc<'a,u16, Table<1>> {
+    pub const fn new(algorithm: &'a Algorithm<u16>) -> Self {
         let table = crc16_table(algorithm.width, algorithm.poly, algorithm.refin);
         Self {
             algorithm,

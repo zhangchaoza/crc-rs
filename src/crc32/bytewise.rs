@@ -3,8 +3,8 @@ use crate::*;
 
 use crate::crc32::{finalize, init, update_bytewise};
 
-impl Crc<u32, Table<1>> {
-    pub const fn new(algorithm: &'static Algorithm<u32>) -> Self {
+impl <'a> Crc<'a,u32, Table<1>> {
+    pub const fn new(algorithm: &'a Algorithm<u32>) -> Self {
         let table = crc32_table(algorithm.width, algorithm.poly, algorithm.refin);
         Self {
             algorithm,

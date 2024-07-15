@@ -2,8 +2,8 @@ use crate::crc8::{finalize, init, update_bytewise};
 use crate::table::crc8_table;
 use crate::*;
 
-impl Crc<u8, Table<1>> {
-    pub const fn new(algorithm: &'static Algorithm<u8>) -> Self {
+impl<'a> Crc<'a, u8, Table<1>> {
+    pub const fn new(algorithm: &'a Algorithm<u8>) -> Self {
         let table = crc8_table(algorithm.width, algorithm.poly, algorithm.refin);
         Self {
             algorithm,

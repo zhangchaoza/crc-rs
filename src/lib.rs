@@ -66,14 +66,14 @@ mod private {
 
 /// Crc instance with a specific width, algorithm, and implementation.
 #[derive(Clone)]
-pub struct Crc<W: Width, I: Implementation = DefaultImpl> {
-    pub algorithm: &'static Algorithm<W>,
+pub struct Crc<'a, W: Width, I: Implementation = DefaultImpl> {
+    pub algorithm: &'a Algorithm<W>,
     data: I::Data<W>,
 }
 
 #[derive(Clone)]
 pub struct Digest<'a, W: Width, I: Implementation = DefaultImpl> {
-    crc: &'a Crc<W, I>,
+    crc: &'a Crc<'a, W, I>,
     value: W,
 }
 

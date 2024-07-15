@@ -3,8 +3,8 @@ use crate::*;
 
 use super::{finalize, init, update_bytewise};
 
-impl Crc<u64, Table<1>> {
-    pub const fn new(algorithm: &'static Algorithm<u64>) -> Self {
+impl <'a> Crc<'a,u64, Table<1>> {
+    pub const fn new(algorithm: &'a Algorithm<u64>) -> Self {
         let table = crc64_table(algorithm.width, algorithm.poly, algorithm.refin);
         Self {
             algorithm,

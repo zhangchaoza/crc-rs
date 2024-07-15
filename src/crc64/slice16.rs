@@ -3,8 +3,8 @@ use crate::*;
 
 use super::{finalize, init, update_slice16};
 
-impl Crc<u64, Table<16>> {
-    pub const fn new(algorithm: &'static Algorithm<u64>) -> Self {
+impl <'a> Crc<'a,u64, Table<16>> {
+    pub const fn new(algorithm: &'a Algorithm<u64>) -> Self {
         let data = crc64_table_slice_16(algorithm.width, algorithm.poly, algorithm.refin);
         Self { algorithm, data }
     }

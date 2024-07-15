@@ -1,8 +1,8 @@
 use super::{finalize, init, update_nolookup};
 use crate::*;
 
-impl Crc<u32, NoTable> {
-    pub const fn new(algorithm: &'static Algorithm<u32>) -> Self {
+impl <'a> Crc<'a,u32, NoTable> {
+    pub const fn new(algorithm: &'a Algorithm<u32>) -> Self {
         Self {
             algorithm,
             data: [],
