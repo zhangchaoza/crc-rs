@@ -179,3 +179,23 @@ fn crc_128() {
         assert_eq!(alg.check, digest.finalize());
     }
 }
+
+#[test]
+fn crc_custom() {
+    let alg = crc::Algorithm::<u16> {
+        width: 12,
+        poly: 0x80f,
+        init: 0x000,
+        refin: false,
+        refout: true,
+        xorout: 0x000,
+        check: 0xdaf,
+        residue: 0x000,
+    };
+    let crc = Crc::<u16>::new(&alg);
+    assert_eq!(alg.check, crc.checksum(INIT));
+    let mut digest = crc.digest();
+    digest.update(INIT_PART1);
+    digest.update(INIT_PART2);
+    assert_eq!(alg.check, digest.finalize());
+}
